@@ -5,20 +5,15 @@
     </form>  
     <ul>
 
-  {{#each articles.showFunction}}
-
-    <li>
-      <p><span>Title:&nbsp;</span>{{title}}, 
-      <br><span>Body:&nbsp;</span>{{body}}, 
-      <br><span>Author:&nbsp;</span>{{author}}</p>
-      <p><form action="" method="get">
-        <input class="h2link" type="submit" formaction="/articles/{{title}}" value="VIEW">
-      </form>
-    </li>
-
-    <br>
-
-  {{/each}}    
 
 </ul>
+
+{{#each obj}}
+<img src="{{link}}" alt="">
+
+<p>
+{{author}}
+</p>
+
+{{/each}}
   </div>

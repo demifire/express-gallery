@@ -1,8 +1,8 @@
 const bookshelf = require('./bookshelf')
 
 const Photos = bookshelf.Model.extend({
-  tableName: 'photo',
-  idAttribute: 'photo_id',
+  tableName: 'gallery',
+  idAttribute: 'gallery_id',
   hasTimestamps: true
 })
 

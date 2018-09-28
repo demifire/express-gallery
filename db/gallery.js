@@ -1,25 +1,45 @@
 class Photos {
     constructor() {
       this.knex = require('../knex/knex.js');
+      this.Photos = require('../knex/models/Photos');
       this._itemsCreated = 3;
       this._itemDeletedArr = [];
     }
   
   loadDatabase() {
-    return this.knex.raw('SELECT * FROM items');
+    return this.Photos
+      .fetchAll()
+      .then(results => {
+        this._photoList = results.models;
+        this._photoNumber = this._photoList.length;
+      })
+      .catch(err => {
+        console.log(err, 'err');
+      })
   }
   
   // Refreshes all objects in the database items array
   showAll () {
-    this.knex.raw('SELECT * FROM items')
-    .then( results => {
-      this._photoList = results.rows;
-      this._photoNumber = this._photoList.length;
-      return results;
-    })
-    .catch( err => {
-      console.log('error', err)
-    });
+    console.log('this was fired');
+      this.Photos
+        .fetchAll()
+        .then(results => {
+          console.log(results.serialize(), 'hello???')
+          this._photoList = results.serialize();
+          // this._photoNumber = this._photoList.length;
+          this.object = results.serialize();
+        })
+        .catch(err => {
+          console.log(err, 'err');
+        })
+    // .then( results => {
+      // this._photoList = results.rows;
+      // this._photoNumber = this._photoList.length;
+    //   return results;
+    // })
+    // .catch( err => {
+    //   console.log('error', err)
+    // });
     return this._photoList;
   }
   

@@ -6,7 +6,7 @@
   
   <br>
 
-{{#if articles.showFunction}}
+{{#if photos.showFunction}}
 
 <h2>List of Articles</h2>
 
@@ -14,12 +14,12 @@
 
 <ul>
 
-  {{#each articles.showFunction}}
+  {{#each photos.showFunction}}
 
     <li>
-      <p><span>Title:&nbsp;</span>{{title}}, 
-      <br><span>Body:&nbsp;</span>{{body}}, 
-      <br><span>Author:&nbsp;</span>{{author}}</p>
+      <p><span>Title:&nbsp;</span>{{author}}, 
+      <br><span>Body:&nbsp;</span>{{link}}, 
+      <br><span>Author:&nbsp;</span>{{description}}</p>
       <p><form action="" method="get">
         <input class="h2link" type="submit" formaction="/articles/{{title}}" value="VIEW">
       </form>
@@ -31,7 +31,7 @@
 
 </ul>
 
-{{#if articles.itemDeleted}}
+{{#if photos.itemDeleted}}
 
 <div class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 

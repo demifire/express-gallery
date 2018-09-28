@@ -7,7 +7,8 @@ const hbs = require('express-handlebars');
 const PORT = process.env.EXPRESS_CONTAINER_PORT;
 const Photos = require('./knex/models/Photos');
 const Users = require('./knex/models/Users');
-const users = require('./routes/users');
+// const users = require('./routes/users');
+const gallery = require('./routes/gallery');
 
 const app = express();
 
@@ -23,10 +24,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.render('home');
+  Photos
+        .fetchAll()
+        .then(results => {
+          console.log(results.serialize(), 'hello???')
+          obj = results.toJSON();
+          res.render('home', {obj});
+        })
+        .catch(err => {
+          console.log(err, 'err');
+        })
 });
 
-app.use('/users', users);
+// app.use('/users', users);
+app.use('/gallery', gallery);
 
 // get all users
 app.get('/api/users', (req, res) => {
