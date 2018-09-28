@@ -3,7 +3,7 @@
 // console.log('process.env', process.env)
 // This console log helps with port mapping and seeing what's reading from your env
 
-require('dotenv').config({path: './.env'})
+require('dotenv').config({ path: './.env' })
 // Gives knex migrations which is outside of the docker daemon access to our .env file
 module.exports = {
 
@@ -32,7 +32,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
       // Connection strings
     },
@@ -49,7 +49,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
