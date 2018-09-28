@@ -1,19 +1,30 @@
-  <h1 class="center">Express Gallery</h1>
-  <div class="center">
-    <form action="" method="get">
-      <button type="submit" formaction="/photos" value="Photos">Photos</button>
-    </form>  
-    <ul>
-
-
-</ul>
-
-{{#each obj}}
-<img src="{{link}}" alt="">
-
-<p>
-{{author}}
-</p>
-
-{{/each}}
+  <div id="page">
+  <div class="header">
+  <h1 class="title">_Express Gallery</h1>
+  <hr>&nbsp;
+  <p class="tagline">Welcome to our online portfolio, we are small group of </p>
   </div>
+
+
+{{!-- http://www.beta-architecture.com/wp-content/uploads/2011/11/0231_02.jpg --}}
+  <div id="body">
+    <div id="leftModule">
+      <img id="featuredImg" src="http://www.beta-architecture.com/wp-content/uploads/2011/11/0231_02.jpg" alt="">
+    </div>
+    <div id="imgDiv">
+  {{#each obj}}
+      <div>
+      <img class="galleryImg" src="{{link}}" alt="">
+      <p><span>Author:&nbsp;</span>{{author}}, 
+      {{!-- <br><span>Body:&nbsp;</span>{{description}},  --}}
+      </br></br>
+      {{!-- <p><form action="" method="get">
+        <input class="h2link" type="submit" formaction="/articles/{{title}}" value="VIEW">
+      </form></p> --}}
+  </div>
+  {{/each}}    
+    </div>
+    </div>
+    </div>
+
+

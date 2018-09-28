@@ -1,0 +1,20 @@
+  <div class="main">
+  <h1 class="center">Express Gallery</h1>
+  <p>yo this is a sup of what is happening where something left</p>
+  </div>
+
+  <div class="imgDiv">
+  {{#each obj}}
+      <div>
+      <img class="galleryImg" src="{{link}}" alt="">
+      <p><span>Author:&nbsp;</span>{{author}}, 
+      {{!-- <br><span>Body:&nbsp;</span>{{description}},  --}}
+      </br></br>
+      {{!-- <p><form action="" method="get">
+        <input class="h2link" type="submit" formaction="/articles/{{title}}" value="VIEW">
+      </form></p> --}}
+  </div>
+  {{/each}}    
+    </div>
+
+
