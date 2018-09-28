@@ -17,6 +17,8 @@ app.engine('.hbs', hbs({
 
 app.set('view engine', '.hbs');
 
+app.use(express.static('public'));
+app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 

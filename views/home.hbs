@@ -1,6 +1,24 @@
   <h1 class="center">Express Gallery</h1>
   <div class="center">
     <form action="" method="get">
-      <button type="submit" formaction="/users" value="Users">Users</button>
+      <button type="submit" formaction="/photos" value="Photos">Photos</button>
     </form>  
+    <ul>
+
+  {{#each articles.showFunction}}
+
+    <li>
+      <p><span>Title:&nbsp;</span>{{title}}, 
+      <br><span>Body:&nbsp;</span>{{body}}, 
+      <br><span>Author:&nbsp;</span>{{author}}</p>
+      <p><form action="" method="get">
+        <input class="h2link" type="submit" formaction="/articles/{{title}}" value="VIEW">
+      </form>
+    </li>
+
+    <br>
+
+  {{/each}}    
+
+</ul>
   </div>
