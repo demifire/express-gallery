@@ -1,19 +1,30 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const hbs = require('express-handlebars');
 // const knex = require('./knex/knex.js')
 
 const PORT = process.env.EXPRESS_CONTAINER_PORT;
 const Photos = require('./knex/models/Photos');
 const Users = require('./knex/models/Users');
+const users = require('./routes/users');
 
 const app = express();
+
+app.engine('.hbs', hbs({
+  defaultLayout : 'main',
+  extname : '.hbs'}));
+
+app.set('view engine', '.hbs');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
-  res.send('sanity check')
-})
+  res.render('home');
+});
+
+app.use('/users', users);
 
 // get all users
 app.get('/api/users', (req, res) => {
