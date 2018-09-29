@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   /* padding-top: 60px; */
-  padding-left: 190px;
-  padding-right: 190px;
+  padding-left: 13%;
+  padding-right: 13%;
 }
 
 #navWrapper {
