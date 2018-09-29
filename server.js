@@ -9,6 +9,8 @@ const Photos = require('./knex/models/Photos');
 const Users = require('./knex/models/Users');
 // const users = require('./routes/users');
 const photos = require('./routes/photos');
+const Photosdb = require('./db/photos');
+const photosdb = new Photosdb();
 
 const app = express();
 
@@ -23,12 +25,24 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// app.get('/', (req, res) => {
+//   Photos
+//         .fetchAll()
+//         .then(results => {
+//           console.log(results.serialize(), 'hello???')
+//           obj = results.toJSON();
+//           res.render('home', {obj});
+//         })
+//         .catch(err => {
+//           console.log(err, 'err');
+//         })
+// });
+
 app.get('/', (req, res) => {
   Photos
         .fetchAll()
         .then(results => {
-          console.log(results.serialize(), 'hello???')
-          obj = results.toJSON();
+          obj = photosdb.showRandom();
           res.render('home', {obj});
         })
         .catch(err => {
@@ -41,14 +55,12 @@ app.use('/photos', photos);
 
 // get all users
 app.get('/api/users', (req, res) => {
-  Users
-    .fetchAll()
-    .then(users => {
-      res.json(users.serialize());
-    })
-    .catch(err => {
-      res.json(err);
-    })
+  res.render('index', {
+    photos : {
+      list : true,
+      showFunction : photosdb.showRandom() 
+    }
+  });
 })
 
 // get all photos by user_id

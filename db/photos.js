@@ -10,8 +10,7 @@ class Photos {
     return this.Photos
       .fetchAll()
       .then(results => {
-        this._photoList = results.models;
-        this._photoNumber = this._photoList.length;
+        this._photoList = results.toJSON();
       })
       .catch(err => {
         console.log(err, 'err');
@@ -20,17 +19,27 @@ class Photos {
 
   showRandom () {
     console.log(this._photoList, 'total photo list');
+    this.loadDatabase();
+      // first grab the array and load it into cache
+      this._tempArr = [];
+      for(var i=0;i<3;i++){
+      let item = this._photoList[Math.floor(Math.random()*this._photoList.length)];
+      let spliceIndex = this.findTheIndex(item.id);
+      let splicedItem = this._photoList.splice(spliceIndex, 1);
+      this._tempArr.push(splicedItem[0]);
+      }
+      console.log(this._tempArr.length, 'this should be populated')
+      return this._tempArr
+      
   }
   
   // Refreshes all objects in the database items array
   showAll () {
-    console.log('this was fired');
       this.Photos
         .fetchAll()
         .then(results => {
           let databaseObj = results.toJSON();
           this._photoList = databaseObj;
-          console.log(this._photoList.databaseObj, 'this is photolist')
         })
         .catch(err => {
           console.log(err, 'err');
