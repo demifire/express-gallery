@@ -193,4 +193,4 @@ class Photos {
   
   } 
   
-  module.exports = Photos;
+module.exports = Photos;

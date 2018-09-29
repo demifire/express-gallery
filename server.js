@@ -11,6 +11,7 @@ const Users = require('./knex/models/Users');
 const photos = require('./routes/photos');
 const Photosdb = require('./db/photos');
 const photosdb = new Photosdb();
+const photosBS = require('./bookshelf/photos')
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.get('/', (req, res) => {
         .fetchAll()
         .then(results => {
           obj = photosdb.showRandom();
+          photosBS.test();
           res.render('home', {obj});
         })
         .catch(err => {
