@@ -8,7 +8,7 @@ const PORT = process.env.EXPRESS_CONTAINER_PORT;
 const Photos = require('./knex/models/Photos');
 const Users = require('./knex/models/Users');
 // const users = require('./routes/users');
-const gallery = require('./routes/gallery');
+const photos = require('./routes/photos');
 
 const app = express();
 
@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 });
 
 // app.use('/users', users);
-app.use('/gallery', gallery);
+app.use('/photos', photos);
 
 // get all users
 app.get('/api/users', (req, res) => {

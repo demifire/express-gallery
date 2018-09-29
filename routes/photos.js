@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const Gallery = require('../db/gallery');
-const photos = new Gallery();
+const Photos = require('../db/photos');
+const photos = new Photos();
 
 router.route('/')
   .get((req, res) => {
@@ -37,10 +37,8 @@ router.route('/new')
   .get((req, res) => {
     res.render('index', {
       photos : {
-        photo : {
-          list : true,
-          showFunction : photos.showAll()
-        }
+        list : true,
+        showFunction : photos.showAll() 
       }
     });
   })

@@ -17,6 +17,10 @@ class Photos {
         console.log(err, 'err');
       })
   }
+
+  showRandom () {
+    console.log(this._photoList, 'total photo list');
+  }
   
   // Refreshes all objects in the database items array
   showAll () {
@@ -24,10 +28,9 @@ class Photos {
       this.Photos
         .fetchAll()
         .then(results => {
-          console.log(results.serialize(), 'hello???')
-          this._photoList = results.serialize();
-          // this._photoNumber = this._photoList.length;
-          this.object = results.serialize();
+          let databaseObj = results.toJSON();
+          this._photoList = databaseObj;
+          console.log(this._photoList.databaseObj, 'this is photolist')
         })
         .catch(err => {
           console.log(err, 'err');
