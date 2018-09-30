@@ -1,0 +1,24 @@
+<h2>Add Photo</h2>
+
+<form action="/gallery" method="post">
+
+  <p><span>Author:&nbsp;</span><input type="text" name="author" value="" required></p>
+  <p><span>Link:&nbsp;</span><input type="text" name="link" value="" required></p>
+  <p><span>Description:&nbsp;</span><input type="text" name="description" value="" required></p>
+
+  <br>
+
+  <input class="h2link" type="submit" value="SUBMIT">
+
+</form> 
+
+<br>
+
+{{#if articles.nameExists}}
+
+<div id="element1" class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  Error: Article title already exists!
+</div>
+
+{{/if}}

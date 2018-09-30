@@ -6,13 +6,14 @@
   <div class="imgDiv">
   {{#each obj}}
       <div>
+      <a href="gallery/{{gallery_id}}">
       <img class="galleryImg" src="{{link}}" alt="">
       <p><span>Author:&nbsp;</span>{{author}}, 
       {{!-- <br><span>Body:&nbsp;</span>{{description}},  --}}
       </br></br>
       {{!-- <p><form action="" method="get">
         <input class="h2link" type="submit" formaction="/articles/{{title}}" value="VIEW">
-      </form></p> --}}
+      </form></p> --}}</a>
   </div>
   {{/each}}    
     </div>

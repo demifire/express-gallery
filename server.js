@@ -2,18 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const hbs = require('express-handlebars');
-// const knex = require('./knex/knex.js')
 
 const PORT = process.env.EXPRESS_CONTAINER_PORT;
 const Photos = require('./knex/models/Photos');
-const Users = require('./knex/models/Users');
-// const users = require('./routes/users');
-const photos = require('./routes/photos');
-const Photosdb = require('./db/photos');
-const photosdb = new Photosdb();
-const photosBS = require('./bookshelf/photos')
+const photosBF = require('./bookshelfFunctions/photos.js')
 
 const app = express();
+
+
 
 app.engine('.hbs', hbs({
   defaultLayout : 'main',
@@ -26,25 +22,12 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.get('/', (req, res) => {
-//   Photos
-//         .fetchAll()
-//         .then(results => {
-//           console.log(results.serialize(), 'hello???')
-//           obj = results.toJSON();
-//           res.render('home', {obj});
-//         })
-//         .catch(err => {
-//           console.log(err, 'err');
-//         })
-// });
-
 app.get('/', (req, res) => {
   Photos
         .fetchAll()
         .then(results => {
-          obj = photosdb.showRandom();
-          photosBS.test();
+          console.log(results.serialize(), 'hello???')
+          obj = results.toJSON();
           res.render('home', {obj});
         })
         .catch(err => {
@@ -52,90 +35,106 @@ app.get('/', (req, res) => {
         })
 });
 
-// app.use('/users', users);
-app.use('/photos', photos);
+// Render Gallery Item Edit Form by ID
+app.get('/gallery/:id/edit', (req, res) => {
+  const { id } = req.params;
+  
+  Content
+      .where({ id })
+      .fetchAll()
+      .then(results => {
+          // console.log('edit results', results);
+          let editObj = results.toJSON();
+          res.render('edit', { editObj });
+      })
+      .catch(err => {
+          res.json(err);
+      });
+});
 
-// get all users
-app.get('/api/users', (req, res) => {
-  res.render('index', {
-    photos : {
-      list : true,
-      showFunction : photosdb.showRandom() 
-    }
+// Edit Gallery Item by ID
+// app.put('/gallery/:id', (req, res) => {
+//   const { id } = req.params;
+//   console.log('PUT ID', id);
+  
+//   const payload = {
+//       title: req.body.title,
+//       link: req.body.link,
+//       image_url: req.body.image_url,
+//       description: req.body.description
+//   }
+
+//   Content
+//       .where({ id })
+//       .fetch()
+//       .then(results => {
+//           return results.save(payload)
+//       })
+//       .then(results => {
+//           // res.redirect('/');
+//           console.log('REDIRECT TO THIS ID', id);
+//           res.redirect(`/gallery/${(id)}`)
+//       })
+//       .catch(err => {
+//           res.json(err);
+//       });
+// });
+
+app.get('/gallery', (req, res) => {
+  Photos
+        .fetchAll()
+        .then(results => {
+          console.log(results.serialize(), 'hello???')
+          obj = results.toJSON();
+          res.render('psuedoGallery', {obj});
+        })
+        .catch(err => {
+          console.log(err, 'err');
+        })
+});
+
+app.get('/gallery/new', (req, res) => {
+
+  res.render('addPhoto')
   });
-})
 
-// get all photos by user_id
-app.get('/api/users/:user_id/photos', (req, res) => {
-  const { user_id } = req.params;
-  Photos
-    .where({ user_id })
-    .fetchAll()
-    .then(photos => {
-      res.json(photos.serialize())
-    })
-    .catch(err => {
-      res.json(err);
-    })
-})
+  // Display Gallery item by ID
+  app.get('/gallery/:gallery_id', (req, res) => {
+    const {gallery_id} = req.params;
+    Photos
+        .where({gallery_id} )
+        .fetchAll()
+        .then(results => {
+            let obj = results.toJSON()[0];
+            console.log(obj, 'what is this?')
+            res.render('photo', { obj });
+        })
+        .catch(err => {
+            res.json(err);
+        });
+});
 
-// create task by user id
-app.post('/api/users/:user_id/photos/new', (req, res) => {
-  const { user_id } = req.params;
+
+
+// Create new gallery item
+app.post('/gallery', (req, res) => {
+  console.log(req.body, 'this is the req body!!');
   const payload = {
-    name: req.body.name
+      author: req.body.author,
+      link: req.body.link,
+      description: req.body.description
   }
   Photos
-    .forge(payload)
-    .save()
-    .then(result => {
-      res.json(result)
-    })
-    .catch(err => {
-      console.log('error', err)
-      res.json(err);
-    })
-})
-
-// update task by task id
-app.put('/api/photos/:task_id/edit', (req, res) => {
-  const { task_id } = req.params;
-
-  const payload = {
-    name: req.body.name,
-    is_complete: req.body.is_complete
-  }
-
-  Photos
-    .where({ task_id })
-    .fetch()
-    .then(task => {
-      return task.save(payload)
-    })
-    .then(result => {
-      console.log('result', result)
-      res.json(result);
-    })
-    .catch(err => {
-      res.json(err);
-    })
-})
-
-// delete task by task id
-app.delete('/api/photos/:photo_id/delete', (req, res) => {
-  const { task_id } = req.params;
-
-  Photos
-    .where({ task_id })
-    .destroy()
-    .then(result => {
-      res.json(result);
-    })
-    .catch(err => {
-      res.json(err);
-    })
-})
-
+      .forge(payload)
+      .save()
+      .then(result => {
+          res.redirect('/');
+      })
+      .catch(err => {
+          console.log(err,'this is not going through')
+          res.json(err);
+      });
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`)
