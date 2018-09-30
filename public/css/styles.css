@@ -6,6 +6,16 @@
   padding-right: 13%;
 }
 
+@media screen and (max-width: 1000px) {
+  #page {
+    display: flex;
+    flex-direction: column;
+    /* padding-top: 60px; */
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}
+
 #navWrapper {
   display: flex;
   flex-direction: row;
