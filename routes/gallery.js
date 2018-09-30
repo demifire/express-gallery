@@ -37,8 +37,39 @@ Router.get('/gallery/:gallery_id', (req, res) => {
 })
 
 //ADD NEW PAINTINGS
-Router.post('./gallery/')
+Router.post('./gallery/new', (req, res) => {
+  const payload = {
+    author: req.body.author,
+    link: req.body.link,
+    description: req.body.description
+  }
+  Gallery
+    .forge(payload)
+    .save()
+    .then(result => {
+      res.redirect('/gallery')
+    })
+    .catch(err => {
+      res.json(err)
+    })
+})
 
+
+//DELETE ENTRIES
+Router.delete('/gallery/:gallery_id', (req, res) => {
+  const { gallery_id } = req.params
+  console.log('gallery id: ', gallery_id);
+
+  Gallery
+    .where({ gallery_id })
+    .destroy()
+    .then(result => {
+      res.redirect('/gallery');
+    })
+    .catch(err => {
+      res.json(err);
+    })
+})
 
 
 

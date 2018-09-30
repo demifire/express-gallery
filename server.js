@@ -7,6 +7,7 @@ const PORT = process.env.EXPRESS_CONTAINER_PORT;
 
 
 const Gallery = require('./routes/gallery.js');
+// const Users = require('./routes/users.js');
 
 //ROUTER
 app.use('/', Gallery);
