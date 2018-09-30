@@ -2,37 +2,51 @@
 const express = require('express');
 const Router = express.Router();
 
-const Gallery = require('../knex/models/Gallery');
+const Gallery = require('../knex/models/Gallery.js');
 
-Router.get('/', (req, res) => {
+//RENDER ALL PAINTINGS
+Router.get('/gallery', (req, res) => {
+
+  Gallery
+    .fetchAll()
+    .then(myGallery => {
+      let galleryItem = myGallery.serialize()
+      res.render('./gallery/gallery.hbs', { galleryItem });
+    })
+    .catch(err => {
+      res.json(err);
+    })
 })
+
+//RENDER DETAILS OF PAINTINGS
+Router.get('/gallery/:gallery_id', (req, res) => {
+  const { gallery_id } = req.params
+  console.log('gallery req.params: ', req.params);
+
+  Gallery
+    .where({ gallery_id })
+    .fetch()
+    .then(painting => {
+      console.log(painting);
+      let paintingDetail = painting.serialize();
+      res.render('./gallery/details.hbs', { paintingDetail });
+    })
+    .catch(err => {
+      console.log('error', err)
+    })
+})
+
+//ADD NEW PAINTINGS
+Router.post('./gallery/')
+
+
+
 
 
 module.exports = Router;
 
 
-
-
-
 //CHAZ CODE
-
-// app.get('/', (req, res) => {
-//   res.render('home');
-// });
-
-// app.use('/users', users);
-
-// // get all users
-// app.get('/api/users', (req, res) => {
-//   Users
-//     .fetchAll()
-//     .then(users => {
-//       res.json(users.serialize());
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     })
-// })
 
 // // get all photos by user_id
 // app.get('/api/users/:user_id/photos', (req, res) => {

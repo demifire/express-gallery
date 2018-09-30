@@ -9,7 +9,7 @@ const PORT = process.env.EXPRESS_CONTAINER_PORT;
 const Gallery = require('./routes/gallery.js');
 
 //ROUTER
-app.use('/gallery', Gallery);
+app.use('/', Gallery);
 
 
 //RUN MIDDLEWARE
