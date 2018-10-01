@@ -2,8 +2,8 @@ const bookshelf = require('./bookshelf');
 
 const Users = bookshelf.Model.extend({
   tableName: 'user',
-  idAttribute: 'user_id',
-  hasTimestamps: true 
+  idAttribute: 'id',
+  hasTimestamps: true
 })
 
 // class Users extends bookshelf.Model {

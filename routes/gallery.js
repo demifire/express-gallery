@@ -4,50 +4,54 @@ const Router = express.Router();
 
 const Gallery = require('../knex/models/Gallery.js');
 
-//RENDER ALL PAINTINGS
-Router.get('/gallery', (req, res) => {
-
+//RENDER ALL ITEMS IN DATABASE
+Router.get('/', (req, res) => {
   Gallery
     .fetchAll()
     .then(myGallery => {
       let galleryItem = myGallery.serialize()
-      res.render('./gallery/gallery.hbs', { galleryItem });
+      res.render('home.hbs', { galleryItem });
     })
     .catch(err => {
       res.json(err);
     })
 })
 
-//RENDER DETAILS OF PAINTINGS
-Router.get('/gallery/:gallery_id', (req, res) => {
-  const { gallery_id } = req.params
+//RENDER DETAILS OF ITEM
+Router.get('/gallery/:id', (req, res) => {
+  const { id } = req.params
   console.log('gallery req.params: ', req.params);
 
   Gallery
-    .where({ gallery_id })
+    .where({ id })
     .fetch()
     .then(painting => {
-      console.log(painting);
+      // console.log(painting);
       let paintingDetail = painting.serialize();
-      res.render('./gallery/details.hbs', { paintingDetail });
+      res.render('./gallery/details', { paintingDetail });
     })
     .catch(err => {
       console.log('error', err)
     })
 })
 
-//ADD NEW PAINTINGS
-Router.post('./gallery/new', (req, res) => {
+//ADD NEW ITEM
+Router.get('/new', (req, res) => {
+  res.render('./gallery/new_item');
+})
+
+//POSTS NEW CREATED ITEM
+Router.post('/gallery', (req, res) => {
   const payload = {
-    author: req.body.author,
-    link: req.body.link,
+    title: req.body.title,
+    image_url: req.body.image_url,
     description: req.body.description
   }
   Gallery
     .forge(payload)
     .save()
     .then(result => {
-      res.redirect('/gallery')
+      res.redirect('/')
     })
     .catch(err => {
       res.json(err)
@@ -56,15 +60,14 @@ Router.post('./gallery/new', (req, res) => {
 
 
 //DELETE ENTRIES
-Router.delete('/gallery/:gallery_id', (req, res) => {
-  const { gallery_id } = req.params
-  console.log('gallery id: ', gallery_id);
+Router.delete('/gallery/:id', (req, res) => {
+  const { id } = req.params
 
   Gallery
-    .where({ gallery_id })
+    .where({ id })
     .destroy()
     .then(result => {
-      res.redirect('/gallery');
+      res.redirect('/');
     })
     .catch(err => {
       res.json(err);

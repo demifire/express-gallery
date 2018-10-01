@@ -1,11 +1,19 @@
-<h1 class="center">Welcome to _Architect</h1>
+<h1>_ARCHITEKT</h1>
 <br>
+<div>Login</div>
+<div>Register</div>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<p>
+  <a href="/new">Add Project</a>
+</p>
+{{#each galleryItem}}
 <div>
-  <a href="/gallery">Enter Here</a>
+  <a href="/gallery/{{ id }}"><img src="{{ image_url }}" alt="No Image">
+    <p> {{ title }}</p>
+  </a>
+
 </div>
+<br>
+<br>
+{{/each}}
+<br>

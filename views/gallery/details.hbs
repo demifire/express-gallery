@@ -1,17 +1,16 @@
-<h1>_Detail</h1>
+<h1>{{paintingDetail.title}}</h1>
 <br>
-<br> <img src="{{paintingDetail.link}}" alt="No Image">
+<br> <img src="{{paintingDetail.image_url}}" alt="No Image">
 <br>
-<p>{{paintingDetail.author}}</p>
 <br> {{paintingDetail.description}}
 <br>
-<br>
-
-<form method='post' action="/gallery/{{gallery_id}}?_method=DELETE">
-  <button type='submit'>Delete</button>
-</form>
-
-
-
-
+<p>
+  <a href="/">Back</a>
+</p>
 <a href="/gallery/{{ id }}/edit">Edit</a>
+<p>
+  <form method='post' action="/gallery/{{ id }}?_method=DELETE">
+    <button type='submit'>Delete</button>
+</p>
+
+</form>
