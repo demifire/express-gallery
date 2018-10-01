@@ -1,0 +1,18 @@
+{{#galleryItem}}
+
+<h1>{{title}}</h1>
+<br>
+<br> <img src="{{image_url}}" alt="No Image">
+<br>
+<br> {{description}}
+<br>
+<p>
+</p>
+<a href="/gallery/{{ id }}/edit">Edit</a>
+<p>
+  <form action="/gallery/{{id}}?_method=DELETE" method="post">
+    <input type="submit" value="DELETE"></form>
+</p>
+
+<a href="/">Back To Gallery</a>
+{{/galleryItem}}

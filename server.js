@@ -12,6 +12,10 @@ const Gallery = require('./routes/gallery.js');
 //ROUTER
 app.use('/', Gallery);
 
+app.get('/', (req, res) => {
+  res.render('home')
+});
+
 
 //RUN MIDDLEWARE
 app.use(express.static('public'));
@@ -20,12 +24,6 @@ app.use(methodOverride('_method'));
 
 app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
-
-
-// app.get('/', (req, res) => {
-//   res.render('home')
-// });
-
 
 
 // tells the app to listen upon the called server

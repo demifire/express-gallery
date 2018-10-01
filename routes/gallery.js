@@ -4,6 +4,7 @@ const Router = express.Router();
 
 const Gallery = require('../knex/models/Gallery.js');
 
+
 //RENDER ALL ITEMS IN DATABASE
 Router.get('/', (req, res) => {
   Gallery
@@ -27,8 +28,8 @@ Router.get('/gallery/:id', (req, res) => {
     .fetch()
     .then(painting => {
       // console.log(painting);
-      let paintingDetail = painting.serialize();
-      res.render('./gallery/details', { paintingDetail });
+      let galleryItem = painting.serialize();
+      res.render('details', { galleryItem });
     })
     .catch(err => {
       console.log('error', err)
@@ -36,12 +37,13 @@ Router.get('/gallery/:id', (req, res) => {
 })
 
 //ADD NEW ITEM
-Router.get('/new', (req, res) => {
-  res.render('./gallery/new_item');
+Router.get('/gallery/new', (req, res) => {
+  res.render('new_item');
 })
 
-//POSTS NEW CREATED ITEM
+// POSTS NEW CREATED ITEM
 Router.post('/gallery', (req, res) => {
+  const { id } = req.params;
   const payload = {
     title: req.body.title,
     image_url: req.body.image_url,
@@ -50,7 +52,7 @@ Router.post('/gallery', (req, res) => {
   Gallery
     .forge(payload)
     .save()
-    .then(result => {
+    .then(() => {
       res.redirect('/')
     })
     .catch(err => {
@@ -61,12 +63,12 @@ Router.post('/gallery', (req, res) => {
 
 //DELETE ENTRIES
 Router.delete('/gallery/:id', (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
 
   Gallery
-    .where({ id })
+    .where(id)
     .destroy()
-    .then(result => {
+    .then(() => {
       res.redirect('/');
     })
     .catch(err => {
