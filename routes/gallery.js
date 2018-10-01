@@ -38,7 +38,7 @@ Router.get('/gallery/:id', (req, res) => {
     })
 })
 
-//ADD NEW ITEM
+//RENDER NEW ITEM FORM
 Router.get('/new', (req, res) => {
   res.render('new_item');
 })
@@ -46,9 +46,6 @@ Router.get('/new', (req, res) => {
 // POSTS NEW CREATED ITEM
 Router.post('/', (req, res) => {
   const { id } = req.params;
-  const gallery = req.body;
-  console.log('newPhoto: ', gallery);
-  console.log('req: ', { id });
   const newPhoto = {
     title: req.body.title,
     image_url: req.body.image_url,
@@ -58,7 +55,7 @@ Router.post('/', (req, res) => {
     .forge(newPhoto)
     .save()
     .then(() => {
-      res.redirect('/')
+      res.redirect(`/`)
     })
     .catch(err => {
       console.log('error', err)
@@ -72,7 +69,7 @@ Router.delete('/gallery/:id', (req, res) => {
   const { id } = req.params;
 
   Gallery
-    .where(id)
+    .where({ id })
     .destroy()
     .then(() => {
       res.redirect('/');
@@ -83,83 +80,52 @@ Router.delete('/gallery/:id', (req, res) => {
 })
 
 
+//RENDER EDIT FORUM
+Router.get('/gallery/:id/edit', (req, res) => {
+  const { id } = req.params;
+
+  Gallery
+    .where({ id })
+    .fetch()
+    .then(result => {
+      let editObj = result.toJSON();
+      res.render('edit', { editObj });
+    })
+    .catch(err => {
+      res.json(err);
+    })
+})
+
+
+//EDIT ENTRIES
+Router.put('/gallery/:id', (req, res) => {
+  const { id } = req.params;
+  const newPhoto = {
+    title: req.body.title,
+    image_url: req.body.image_url,
+    description: req.body.description
+  }
+
+  Gallery
+    .where({ id })
+    .fetch()
+    .then(update => {
+      return update.save(newPhoto)
+    })
+    .then(result => {
+      res.redirect(`/gallery/${(id)}`)
+    })
+    .catch(err => {
+      res.json(err)
+    })
+})
+
 
 
 module.exports = Router;
 
 
-//CHAZ CODE
 
-// // get all photos by user_id
-// app.get('/api/users/:user_id/photos', (req, res) => {
-//   const { user_id } = req.params;
-//   Photos
-//     .where({ user_id })
-//     .fetchAll()
-//     .then(photos => {
-//       res.json(photos.serialize())
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     })
-// })
-
-// // create task by user id
-// app.post('/api/users/:user_id/photos/new', (req, res) => {
-//   const { user_id } = req.params;
-//   const payload = {
-//     name: req.body.name
-//   }
-//   Photos
-//     .forge(payload)
-//     .save()
-//     .then(result => {
-//       res.json(result)
-//     })
-//     .catch(err => {
-//       console.log('error', err)
-//       res.json(err);
-//     })
-// })
-
-// // update task by task id
-// app.put('/api/photos/:task_id/edit', (req, res) => {
-//   const { task_id } = req.params;
-
-//   const payload = {
-//     name: req.body.name,
-//     is_complete: req.body.is_complete
-//   }
-
-//   Photos
-//     .where({ task_id })
-//     .fetch()
-//     .then(task => {
-//       return task.save(payload)
-//     })
-//     .then(result => {
-//       console.log('result', result)
-//       res.json(result);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     })
-// })
-
-// // delete task by task id
-// app.delete('/api/photos/:photo_id/delete', (req, res) => {
-//   const { task_id } = req.params;
-
-//   Photos
-//     .where({ task_id })
-//     .destroy()
-//     .then(result => {
-//       res.json(result);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     })
-// })
 
 
 

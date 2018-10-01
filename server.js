@@ -9,14 +9,6 @@ const PORT = process.env.EXPRESS_CONTAINER_PORT;
 const Gallery = require('./routes/gallery.js');
 // const Users = require('./routes/users.js');
 
-//ROUTER
-app.use('/', Gallery);
-
-app.get('/', (req, res) => {
-  res.render('home')
-});
-
-
 //RUN MIDDLEWARE
 app.use(express.static('public'));
 app.use(bp.urlencoded({ extended: true }));
@@ -24,6 +16,13 @@ app.use(methodOverride('_method'));
 
 app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
+
+//ROUTER
+app.use('/', Gallery);
+
+app.get('/', (req, res) => {
+  res.render('home')
+});
 
 
 // tells the app to listen upon the called server

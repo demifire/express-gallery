@@ -1,6 +1,7 @@
+<h1><a href="/">_ARCHITEKT</a></h1>
+<br>
 {{#galleryItem}}
-
-<h1>{{title}}</h1>
+<h2>{{title}}</h2>
 <br>
 <br> <img src="{{image_url}}" alt="No Image">
 <br>
@@ -8,7 +9,7 @@
 <br>
 <p>
 </p>
-<a href="/{{ id }}/edit">Edit</a>
+<a href="/gallery/{{ id }}/edit">Edit</a>
 <p>
   <form action="/gallery/{{ id }}?_method=DELETE" method="post">
     <input type="submit" value="DELETE"></form>

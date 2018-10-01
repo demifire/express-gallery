@@ -1,0 +1,23 @@
+<h1><a href="/">_ARCHITEKT</a></h1>
+<br>
+<h2>Update Gallery</h2>
+<br>
+<form action="/gallery/{{editObj.id}}?_method=PUT" method="post">
+  <p>
+    <span>Edit Title: </span><input type="text" name="title" placeholder="Title">
+  </p>
+
+  <p>
+    <span>Edit Image URL: </span><input type="text" name="image_url" placeholder="Image_Url">
+  </p>
+
+  <p>
+    <span>Edit Description: </span><input type="text" name="description" placeholder="Description">
+  </p>
+  <p>
+    <input type="submit" value="EDIT">
+  </p>
+</form>
+<br>
+<a href="/gallery/{{editObj.id}}">Back</a>
+<br>
