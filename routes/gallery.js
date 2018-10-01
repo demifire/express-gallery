@@ -5,12 +5,13 @@ const Router = express.Router();
 const Gallery = require('../knex/models/Gallery.js');
 
 
-//RENDER ALL ITEMS IN DATABASE
+//RENDER ALL ITEMS FOR HOMEPAGE
 Router.get('/', (req, res) => {
   Gallery
     .fetchAll()
     .then(myGallery => {
       let galleryItem = myGallery.serialize()
+      // console.log('homeGallery: ', galleryItem);
       res.render('home.hbs', { galleryItem });
     })
     .catch(err => {
@@ -30,6 +31,7 @@ Router.get('/gallery/:id', (req, res) => {
       // console.log(painting);
       let galleryItem = painting.serialize();
       res.render('details', { galleryItem });
+      // console.log('galleryryItem: ', galleryItem)
     })
     .catch(err => {
       console.log('error', err)
@@ -37,25 +39,29 @@ Router.get('/gallery/:id', (req, res) => {
 })
 
 //ADD NEW ITEM
-Router.get('/gallery/new', (req, res) => {
+Router.get('/new', (req, res) => {
   res.render('new_item');
 })
 
 // POSTS NEW CREATED ITEM
-Router.post('/gallery', (req, res) => {
+Router.post('/', (req, res) => {
   const { id } = req.params;
-  const payload = {
+  const gallery = req.body;
+  console.log('newPhoto: ', gallery);
+  console.log('req: ', { id });
+  const newPhoto = {
     title: req.body.title,
     image_url: req.body.image_url,
     description: req.body.description
   }
   Gallery
-    .forge(payload)
+    .forge(newPhoto)
     .save()
     .then(() => {
       res.redirect('/')
     })
     .catch(err => {
+      console.log('error', err)
       res.json(err)
     })
 })
