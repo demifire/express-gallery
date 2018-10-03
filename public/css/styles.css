@@ -1,0 +1,47 @@
+html {
+  display: block;
+}
+
+body {
+  font-family: arial, verdana, georgia;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  color: #c7c7c7;
+}
+
+.logo {
+  color: #A1A1A1;
+  font-size: 40px;
+}
+
+.title:link {
+  font-size: 40px;
+  color: #A1A1A1;
+}
+
+a:link { 
+  color: #A1A1A1; 
+  text-decoration: none; 
+  transition: 1s ease;
+}
+
+a:visited { color: #A1A1A1; text-decoration: none}
+a:hover { color: pink; text-decoration: none;}
+a:active { color: #A1A1A1; text-decoration: none}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 766px) {
+.logo {
+    max-width: 300px;
+    height: inherit;
+}
+}

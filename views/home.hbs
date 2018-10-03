@@ -1,20 +1,20 @@
 <div id="header">
-  <h1 id='title'>_ARCHITEKT</h1>
-
-  <div id='bio'> Welcome to our online portfolio, we are small group of passionate designers and architects, looking to
+  <h1 class='logo'>_ARCHITEKT</h1>
+  <br>
+  <div>Login</div>
+  <div>Register</div>
+  <br>
+  <div class='bio'> Welcome to our online portfolio, we are small group of passionate designers and architects, looking
+    to
     change and create amazing digital images to inspire others to follow in our innovative steps. Free Architect
     WordPress Theme </div>
 </div>
-<br>
-<div>Login</div>
-<div>Register</div>
-<br>
 <p>
   <a href="/new">Add Project</a>
 </p>
 {{#each galleryItem}}
 <div>
-  <a href="/gallery/{{ id }}"><img src="{{ image_url }}" alt="No Image">
+  <a href="/gallery/{{ id }}"><img class='homeImage' src="{{ image_url }}" alt="No Image">
     <p> {{ title }}</p>
   </a>
 

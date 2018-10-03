@@ -5,9 +5,21 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const PORT = process.env.EXPRESS_CONTAINER_PORT;
 
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
+
 
 const Gallery = require('./routes/gallery.js');
-// const Users = require('./routes/users.js');
+const AuthRoutes = require('./routes/authRoutes.js');
+
+app.use(session({
+  store: new RedisStore({ url: 'redis://redis-session-store:6379', logErrors: true }),
+  secret: 'zyzzbrah',
+  resave: false,
+  saveUninitialized: true
+}))
+
+
 
 //RUN MIDDLEWARE
 app.use(express.static('public'));
@@ -19,8 +31,10 @@ app.set('view engine', '.hbs');
 
 //ROUTER
 app.use('/', Gallery);
+app.use('/', AuthRoutes);
 
 app.get('/', (req, res) => {
+  console.log('req.session: ', req.session);
   res.render('home')
 });
 
