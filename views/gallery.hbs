@@ -1,20 +1,25 @@
-<h1>temp: this should be static homepage</h1>
+<h1>temp: logged in homepage</h1>
+
 <div id="header">
   <h1 class='logo'>Memento Vitae</h1>
   <br>
-  <div><a href="/auth/login">Login</a></div>
-  <div><a href="/auth/register">Register</a></div>
   <br>
   <div class='bio'> Welcome to our online portfolio, we are small group of passionate designers and architects, looking
     to
     change and create amazing digital images to inspire others to follow in our innovative steps. Free Architect
     WordPress Theme </div>
 </div>
-<br>
+<p>
+  <a href="/auth/logout">Log Out</a>
+  <br>
+  <a href="/new">Add Project</a>
+</p>
 {{#each galleryItem}}
 <div>
-  <img class='homeImage' src="{{ image_url }}" alt="No Image">
-  <p> {{ title }}</p>
+  <a href="/gallery/{{ id }}"><img class='homeImage' src="{{ image_url }}" alt="No Image">
+    <p> {{ title }}</p>
+  </a>
+
 </div>
 <br>
 <br>

@@ -4,8 +4,7 @@ const Router = express.Router();
 
 const Gallery = require('../knex/models/Gallery.js');
 
-
-//RENDER ALL ITEMS FOR HOMEPAGE
+//RENFER GALLERY
 Router.get('/', (req, res) => {
   Gallery
     .fetchAll()
@@ -13,6 +12,21 @@ Router.get('/', (req, res) => {
       let galleryItem = myGallery.serialize()
       // console.log('homeGallery: ', galleryItem);
       res.render('home.hbs', { galleryItem });
+    })
+    .catch(err => {
+      res.json(err);
+    })
+})
+
+
+//RENDER GALLERY AND ALL ITEMS FOR HOMEPAGE
+Router.get('/gallery', (req, res) => {
+  Gallery
+    .fetchAll()
+    .then(myGallery => {
+      let galleryItem = myGallery.serialize()
+      // console.log('homeGallery: ', galleryItem);
+      res.render('gallery.hbs', { galleryItem });
     })
     .catch(err => {
       res.json(err);

@@ -33,7 +33,7 @@ app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(flash())
+// app.use(flash());
 
 app.set('view engine', '.hbs');
 
@@ -41,11 +41,6 @@ app.set('view engine', '.hbs');
 //ROUTER
 app.use('/', Gallery);
 app.use('/', AuthRoutes);
-
-app.get('/', (req, res) => {
-  console.log('req.session: ', req.session);
-  res.render('home')
-});
 
 
 // tells the app to listen upon the called server
