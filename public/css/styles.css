@@ -1,35 +1,91 @@
+@font-face {
+  font-family: 'PaintingWithChocolate';
+  src: url('../fonts/Painting_With_Chocolate.ttf');
+}
+
+@font-face {
+  font-family: 'Parisish';
+  src: url('../fonts/Parisish.ttf');
+}
+
+@font-face {
+  font-family: 'Aliquam';
+  src: url('../fonts/Aliquam.ttf');
+}
+
+body {
+  margin: 0px;
+  font-family: 'Aliquam', verdana, georgia;
+  font-size: 20px;
+  background-color: #FFFFFF;
+  color: rgba(9, 9, 9, 0.735);
+  width: 100%;
+}
+
 #homeHeader {
   background-image: url('https://images.pexels.com/photos/258109/pexels-photo-258109.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
   width: 100%;
+  height: 700px;
+  background-repeat:no-repeat;
+  -webkit-background-size: 100% auto;
+  -moz-background-size: 100% auto;
+  -o-background-size: 100% auto;
+  background-size: 100% auto ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* body {
-  font-family: arial, verdana, georgia;
-  font-size: 16px;
-  background-color: #FFFFFF;
-  color: #c7c7c7;
-  width: 100%;
+#headerWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* align-content: flex-end; */
+  /* justify-content: space-evenly; */
+}
+
+.nav {
+  flex: 2 0px;
+  align-items: center;
+  justify-content: center;
+  padding-left: 60px;
+}
+
+.bio {
+  padding-left: 5%;
+  padding-right: 22%;
 }
 
 .logo {
-  color: #A1A1A1;
-  font-size: 40px;
+  padding-left: 40px;
+  color: black;
+  font-size: 60px;
 }
 
 .title:link {
-  font-size: 40px;
-  color: #A1A1A1;
+  font-size: 60px;
+  color: black;
 }
 
 a:link { 
-  color: #A1A1A1; 
+  color: black; 
   text-decoration: none; 
   transition: 1s ease;
 }
 
-a:visited { color: #A1A1A1; text-decoration: none}
-a:hover { color: pink; text-decoration: none;}
-a:active { color: #A1A1A1; text-decoration: none} */
+h1 {
+  display: block;
+  font-family: 'Parisish';
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+a:hover { color: blue; text-decoration: none;}
+
 
 
 
