@@ -24,7 +24,8 @@ Router.route('/')
   });
 
 //RENDER DETAILS OF ITEM
-Router.get('/:id', (req, res) => {
+Router.route('/:id')
+  .get(isAuthenticated, (req, res) => {
   const { id } = req.params
   console.log('gallery req.params: ', req.params);
 

@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const PORT = process.env.EXPRESS_CONTAINER_PORT;
 const GalleryDB = require('./knex/models/Gallery.js');
+const isHomeAuthenticated = require('./middleware/homeAuthenticated.js');
 // const flash = require('connect-flash');
 
 
@@ -43,8 +44,8 @@ app.set('view engine', '.hbs');
 app.use('/gallery', Gallery);
 app.use('/auth', AuthRoutes);
 
-app.get('/', (req, res) => {
-  GalleryDB
+app.get('/', isHomeAuthenticated, (req, res) => {
+    GalleryDB
     .fetchAll()
     .then(myGallery => {
       let galleryItem = myGallery.serialize()

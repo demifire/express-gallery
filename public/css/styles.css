@@ -1,12 +1,15 @@
-html {
-  display: block;
+#homeHeader {
+  background-image: url('https://images.pexels.com/photos/258109/pexels-photo-258109.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+  width: 100%;
 }
 
 body {
+  display: flex;
   font-family: arial, verdana, georgia;
   font-size: 16px;
   background-color: #FFFFFF;
   color: #c7c7c7;
+  width: 100%;
 }
 
 .logo {
@@ -39,9 +42,9 @@ a:active { color: #A1A1A1; text-decoration: none}
 
 
 
-@media screen and (max-width: 766px) {
+/* @media screen and (max-width: 766px) {
 .logo {
     max-width: 300px;
     height: inherit;
 }
-}
+} */
