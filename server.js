@@ -4,6 +4,7 @@ const bp = require('body-parser');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const PORT = process.env.EXPRESS_CONTAINER_PORT;
+const GalleryDB = require('./knex/models/Gallery.js');
 // const flash = require('connect-flash');
 
 
@@ -39,9 +40,21 @@ app.set('view engine', '.hbs');
 
 
 //ROUTER
-app.use('/', Gallery);
-app.use('/', AuthRoutes);
+app.use('/gallery', Gallery);
+app.use('/auth', AuthRoutes);
 
+app.get('/', (req, res) => {
+  GalleryDB
+    .fetchAll()
+    .then(myGallery => {
+      let galleryItem = myGallery.serialize()
+      // console.log('homeGallery: ', galleryItem);
+      res.render('home.hbs', { galleryItem });
+    })
+    .catch(err => {
+      res.json(err);
+    })
+})
 
 // tells the app to listen upon the called server
 app.listen(PORT, () => {

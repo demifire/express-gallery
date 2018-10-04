@@ -3,38 +3,31 @@ const express = require('express');
 const Router = express.Router();
 
 const Gallery = require('../knex/models/Gallery.js');
-
-//RENFER GALLERY
-Router.get('/', (req, res) => {
-  Gallery
-    .fetchAll()
-    .then(myGallery => {
-      let galleryItem = myGallery.serialize()
-      // console.log('homeGallery: ', galleryItem);
-      res.render('home.hbs', { galleryItem });
-    })
-    .catch(err => {
-      res.json(err);
-    })
-})
-
+const auth = require('./authRoutes.js')
+console.log(auth.isAuthenticated,'what is this?')
 
 //RENDER GALLERY AND ALL ITEMS FOR HOMEPAGE
-Router.get('/gallery', (req, res) => {
-  Gallery
-    .fetchAll()
-    .then(myGallery => {
-      let galleryItem = myGallery.serialize()
-      // console.log('homeGallery: ', galleryItem);
-      res.render('gallery.hbs', { galleryItem });
-    })
-    .catch(err => {
-      res.json(err);
-    })
-})
+
+// Router.get('/', auth.isAuthenticated, (req, res) => {
+//   // console.log(auth,'what is this?')
+//   res.send('YOU HAVE FOUND DA SEKRET')
+// })
+
+// Router.get('/', (req, res) => {
+//   Gallery
+//     .fetchAll()
+//     .then(myGallery => {
+//       let galleryItem = myGallery.serialize()
+//       // console.log('homeGallery: ', galleryItem);
+//       res.render('gallery.hbs', { galleryItem });
+//     })
+//     .catch(err => {
+//       res.json(err);
+//     })
+// })
 
 //RENDER DETAILS OF ITEM
-Router.get('/gallery/:id', (req, res) => {
+Router.get('/:id', (req, res) => {
   const { id } = req.params
   console.log('gallery req.params: ', req.params);
 
@@ -79,7 +72,7 @@ Router.post('/', (req, res) => {
 
 
 //DELETE ENTRIES
-Router.delete('/gallery/:id', (req, res) => {
+Router.delete('/:id', (req, res) => {
   const { id } = req.params;
 
   Gallery
@@ -95,7 +88,7 @@ Router.delete('/gallery/:id', (req, res) => {
 
 
 //RENDER EDIT FORUM
-Router.get('/gallery/:id/edit', (req, res) => {
+Router.get('/:id/edit', (req, res) => {
   const { id } = req.params;
 
   Gallery
@@ -112,7 +105,7 @@ Router.get('/gallery/:id/edit', (req, res) => {
 
 
 //EDIT ENTRIES
-Router.put('/gallery/:id', (req, res) => {
+Router.put('/:id', (req, res) => {
   const { id } = req.params;
   const newPhoto = {
     title: req.body.title,
@@ -127,7 +120,7 @@ Router.put('/gallery/:id', (req, res) => {
       return update.save(newPhoto)
     })
     .then(result => {
-      res.redirect(`/gallery/${(id)}`)
+      res.redirect(`/${(id)}`)
     })
     .catch(err => {
       res.json(err)

@@ -77,12 +77,12 @@ Passport.use(new LocalStrategy((username, password, done) => {
 const SALT_ROUND = 12
 
 //RENDERS THE USER REGISTRATION FORM
-Router.get('/auth/register', (req, res) => {
+Router.get('/register', (req, res) => {
   res.render('./auth/register');
 });
 
 //POSTS THE USER REGISTRATION DATA TO DB AND REDIRECTS TO GALLERY
-Router.post('/auth/register', (req, res) => {
+Router.post('/register', (req, res) => {
   const { email, username, password } = req.body;
 
   bcrypt.hash(password, SALT_ROUND)
@@ -99,37 +99,44 @@ Router.post('/auth/register', (req, res) => {
       console.log('user: ', user);
       // res.json(user) //What exactly does this do??
       // res.sendStatus(200) //What
-      res.redirect('/auth/login')
+      res.redirect('/login')
     })
 });
 
 
 //RENDERS THE LOGIN REGISTRATION FORM
-Router.get('/auth/login', (req, res) => {
+Router.get('/login', (req, res) => {
   res.render('./auth/login');
 });
 
-Router.post('/auth/login', Passport.authenticate('local', { failureRedirect: '/auth/login' }), (req, res) => {
+Router.post('/login', Passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
   res.redirect('/gallery');
 })
 
 
-Router.get('/auth/logout', (req, res) => {
+Router.get('/logout', (req, res) => {
   req.logout()
   res.redirect('/')
 })
 
-Router.get('/auth/secret', isAuthenticated, (req, res) => {
+Router.get('/secret', isAuthenticated, (req, res) => {
   res.send('YOU HAVE FOUND DA SEKRET')
 })
 
-function isAuthenticated(req, res, done) {
-  if (req.isAuthenticated()) {
-    done()
-  } else {
-    res.redirect('/')
-  }
-}
+function isAuthenticated(req, res, next) {
+  // will pass on to the next middleware if successfully authenticated
+  if (req.isAuthenticated()) { next(); }
+  // need to redirect to error page or notify user somehow that permission has been denied
+  else { res.redirect('/'); }
+};
+
+// function isAuthenticated(req, res, done) {
+//   if (req.isAuthenticated()) {
+//     done()
+//   } else {
+//     res.redirect('/')
+//   }
+// }
 
 module.exports = Router;
 
