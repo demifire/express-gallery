@@ -87,30 +87,35 @@ router.get('/auth/login', (req, res) => {
   res.render('./auth/login');
 });
 
+// router.get('/auth/logout', (req, res) => {
+//   res.render('./auth/logout');
+// });
+
 
 router.post('/auth/login', passport.authenticate('local', { failureRedirect: '/auth/login' }), (req, res) => {
   // grab the user on record
   // compare req.body.password to password on record
-
+  console.log(req.isAuthenticated(), "supsupusp ***************")
   res.redirect('/');
 })
 
-// router.post('/auth/logout', (req, res) => {
-//   req.logout()
-//   res.redirect('/')
-// })
+router.get('/auth/logout', (req, res) => {
+  req.logout()
+  console.log(req, ' what the ef?')
+  res.redirect('/')
+})
 
-// router.get('/auth/secret', isAuthenticated, (req, res) => {
-//   res.send('YOU HAVE FOUND DA SEKRET')
-// })
+router.get('/auth/secret', isAuthenticated, (req, res) => {
+  res.send('YOU HAVE FOUND DA SEKRET')
+})
 
-// function isAuthenticated(req, res, done) {
-//   if (req.isAuthenticated()) {
-//     done()
-//   } else {
-//     res.redirect('/')
-//   }
-// }
+function isAuthenticated(req, res, done) {
+  if (req.isAuthenticated()) {
+    done()
+  } else {
+    res.redirect('/')
+  }
+}
 
 module.exports = router;
 
