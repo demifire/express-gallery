@@ -45,6 +45,76 @@ body {
   /* justify-content: space-evenly; */
 }
 
+#bodyInnerWrap1 {
+  display: flex;
+  flex-direction: row;
+}
+
+#bodyInnerWrap2 {
+  display: flex;
+  flex-direction: row;
+}
+
+#sunset {
+  background-image: url('https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+  width: 100%;
+  height: 475px;
+  background-repeat:no-repeat;
+  -webkit-background-size: 100% auto;
+  -moz-background-size: 100% auto;
+  -o-background-size: 100% auto;
+  background-size: 100% auto ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1px;
+}
+
+#sunset2 {
+  background-image: url('https://www.goodfreephotos.com/albums/germany/other-germany/sunset-over-the-lake-landscape-in-cuxhaven-germany.jpg');
+  width: 100%;
+  height: 475px;
+  background-repeat:no-repeat;
+  -webkit-background-size: 100% auto;
+  -moz-background-size: 100% auto;
+  -o-background-size: 100% auto;
+  background-size: 100% auto ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1px 1px 1px 0px;
+}
+
+#night {
+  background-image: url('https://images.pexels.com/photos/672914/pexels-photo-672914.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+  width: 100%;
+  height: 475px;
+  background-repeat:no-repeat;
+  -webkit-background-size: 100% auto;
+  -moz-background-size: 100% auto;
+  -o-background-size: 100% auto;
+  background-size: 100% auto ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px 1px 1px 1px;
+}
+
+#night2 {
+  background-image: url('https://images.pexels.com/photos/792835/pexels-photo-792835.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+  width: 100%;
+  height: 475px;
+  background-repeat:no-repeat;
+  -webkit-background-size: 100% auto;
+  -moz-background-size: 100% auto;
+  -o-background-size: 100% auto;
+  background-size: 100% auto ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px 1px 1px 0px;
+}
+
 .nav {
   flex: 2 0px;
   align-items: center;
