@@ -25,34 +25,32 @@ Passport.deserializeUser((user, done) => {
 })
 
 // CONFIGURATION TO VERIFY CALLBACK FOR LOCAL AUTHENTICATION
-Passport.use(new LocalStrategy({ usernameField: 'username' }, (username, password, done) => {
+Passport.use(new LocalStrategy((username, password, done) => {
+  console.log('02 - local is being called')
   Users
     .where({ username })
     .fetch()
     .then(user => {
-      // user = user.toJSON();
-      console.log('fuckkkkk: ', user);
-
-      bcrypt.compare(password, user.attributes.password)
-        .then(result => {
-          console.log('RESSSS: ', result);
-          console.log('pass: ', password);
-          console.log('user.att: ', user.attributes.password);
-          if (result) {
-            console.log('asdf ', user);
+      console.log('user in local strategy', user)
+      user = user.toJSON();
+      // if (user.password === password) {
+      //   done(null, user )
+      // } else {
+      //   done(null, false)
+      // }
+      bcrypt.compare(password, user.password)
+        .then(res => {
+          if (res) {
             done(null, user)
           } else {
             done(null, false)
           }
         })
-        .catch(err => {
-          done(null, false)
-        })
     })
     .catch(err => {
-      console.log(err);
+      done(null, false)
     })
-}));
+}))
 
 // Passport.use(new LocalStrategy(function (username, password, done) {
 //   return new Users({ username: username })
@@ -101,7 +99,7 @@ Router.post('/auth/register', (req, res) => {
       user = user.toJSON()
       console.log('user: ', user);
       // res.json(user) //What exactly does this do??
-      // res.sendStatus(200) //What 
+      // res.sendStatus(200) //What
       res.redirect('/')
     })
 });
@@ -112,8 +110,7 @@ Router.get('/auth/login', (req, res) => {
 
 Router.post('/auth/login', Passport.authenticate('local', {
   successRedirect: '/',
-  // failureRedirect: '/auth/login',
-  // failureFlash: true
+  failureRedirect: '/auth/login'
 }), (req, res) => {
 })
 
