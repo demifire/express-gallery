@@ -99,7 +99,7 @@ Router.post('/register', (req, res) => {
       console.log('user: ', user);
       // res.json(user) //What exactly does this do??
       // res.sendStatus(200) //What
-      res.redirect('/login')
+      res.redirect('/auth/login')
     })
 });
 
@@ -138,6 +138,4 @@ function isAuthenticated(req, res, next) {
 //   }
 // }
 
-module.exports = Router;
-
-
+module.exports = Router

@@ -3,28 +3,25 @@ const express = require('express');
 const Router = express.Router();
 
 const Gallery = require('../knex/models/Gallery.js');
-const auth = require('./authRoutes.js')
-console.log(auth.isAuthenticated,'what is this?')
+
+const isAuthenticated = require('../middleware/authenticated.js');
+
 
 //RENDER GALLERY AND ALL ITEMS FOR HOMEPAGE
 
-// Router.get('/', auth.isAuthenticated, (req, res) => {
-//   // console.log(auth,'what is this?')
-//   res.send('YOU HAVE FOUND DA SEKRET')
-// })
-
-// Router.get('/', (req, res) => {
-//   Gallery
-//     .fetchAll()
-//     .then(myGallery => {
-//       let galleryItem = myGallery.serialize()
-//       // console.log('homeGallery: ', galleryItem);
-//       res.render('gallery.hbs', { galleryItem });
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     })
-// })
+Router.route('/')
+  .get(isAuthenticated, (req, res) => {
+    return Gallery
+    .fetchAll()
+    .then(myGallery => {
+      let galleryItem = myGallery.serialize()
+      // console.log('homeGallery: ', galleryItem);
+      res.render('gallery.hbs', { galleryItem });
+    })
+    .catch(err => {
+      res.json(err);
+    })
+  });
 
 //RENDER DETAILS OF ITEM
 Router.get('/:id', (req, res) => {
