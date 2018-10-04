@@ -119,8 +119,8 @@ Router.get('/auth/logout', (req, res) => {
   res.redirect('/')
 })
 
-Router.get('/gallery', isAuthenticated, (req, res) => {
-  // res.send('YOU HAVE FOUND DA SEKRET')
+Router.get('/auth/secret', isAuthenticated, (req, res) => {
+  res.send('YOU HAVE FOUND DA SEKRET')
 })
 
 function isAuthenticated(req, res, done) {
