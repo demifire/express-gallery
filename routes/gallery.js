@@ -44,9 +44,10 @@ Router.route('/:id')
 })
 
 //RENDER NEW ITEM FORM
-Router.get('/new', (req, res) => {
-  res.render('new_item');
-})
+Router.route('/new')
+  .get(isAuthenticated, (req, res) => {
+    res.render('new_item');
+  }) 
 
 // POSTS NEW CREATED ITEM
 Router.post('/', (req, res) => {
