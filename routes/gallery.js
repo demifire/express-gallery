@@ -21,13 +21,33 @@ Router.route('/')
     .catch(err => {
       res.json(err);
     })
-  });
+  })
+
+  // POSTS NEW CREATED ITEM
+  .post(isAuthenticated, (req, res) => {
+    const { id } = req.params;
+    const newPhoto = {
+      title: req.body.title,
+      image_url: req.body.image_url,
+      description: req.body.description
+    }
+    Gallery
+      .forge(newPhoto)
+      .save()
+      .then(() => {
+        res.redirect(`/`)
+      })
+      .catch(err => {
+        console.log('error', err)
+        res.json(err)
+      })
+  })
 
 //RENDER DETAILS OF ITEM
 Router.route('/:id')
   .get(isAuthenticated, (req, res) => {
-  const { id } = req.params
-  console.log('gallery req.params: ', req.params);
+    const { id } = req.params
+    console.log('gallery req.params: ', req.params);
 
   Gallery
     .where({ id })
@@ -47,31 +67,13 @@ Router.route('/:id')
 Router.route('/new')
   .get(isAuthenticated, (req, res) => {
     res.render('new_item');
-  }) 
+  })
 
-// POSTS NEW CREATED ITEM
-Router.post('/', (req, res) => {
-  const { id } = req.params;
-  const newPhoto = {
-    title: req.body.title,
-    image_url: req.body.image_url,
-    description: req.body.description
-  }
-  Gallery
-    .forge(newPhoto)
-    .save()
-    .then(() => {
-      res.redirect(`/`)
-    })
-    .catch(err => {
-      console.log('error', err)
-      res.json(err)
-    })
-})
 
 
 //DELETE ENTRIES
-Router.delete('/:id', (req, res) => {
+Router.route('/:id')
+.delete(isAuthenticated, (req, res) => {
   const { id } = req.params;
 
   Gallery
@@ -87,7 +89,8 @@ Router.delete('/:id', (req, res) => {
 
 
 //RENDER EDIT FORUM
-Router.get('/:id/edit', (req, res) => {
+Router.route('/:id/edit')
+ .get(isAuthenticated, (req, res) => {
   const { id } = req.params;
 
   Gallery
@@ -104,7 +107,8 @@ Router.get('/:id/edit', (req, res) => {
 
 
 //EDIT ENTRIES
-Router.put('/:id', (req, res) => {
+Router.route('/:id')
+.get(isAuthenticated, (req, res) => {
   const { id } = req.params;
   const newPhoto = {
     title: req.body.title,

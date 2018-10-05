@@ -101,6 +101,10 @@ Router.post('/register', (req, res) => {
       // res.sendStatus(200) //What
       res.redirect('/auth/login')
     })
+    .catch(err => {
+      console.log(err, 'err')
+      res.redirect('/register')
+    })
 });
 
 
