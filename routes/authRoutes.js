@@ -47,7 +47,7 @@ Passport.use(new LocalStrategy((username, password, done) => {
       }
     })
     .catch(err => {
-      done(null, false)
+      done(null, false, { message: 'Incorrect Username/Password' })
     })
 }))
 
@@ -109,9 +109,12 @@ Router.get('/auth/login', (req, res) => {
   res.render('./auth/login');
 });
 
-Router.post('/auth/login', Passport.authenticate('local', { failureRedirect: '/auth/login' }), (req, res) => {
-  res.redirect('/gallery');
-})
+Router.post('/auth/login', Passport.authenticate('local',
+  {
+    successRedirect: '/gallery',
+    failureRedirect: '/auth/login',
+    failureFlash: true
+  }));
 
 
 Router.get('/auth/logout', (req, res) => {
@@ -119,17 +122,26 @@ Router.get('/auth/logout', (req, res) => {
   res.redirect('/')
 })
 
-Router.get('/gallery', isAuthenticated, (req, res) => {
-  // res.send('YOU HAVE FOUND DA SEKRET')
-})
 
-function isAuthenticated(req, res, done) {
-  if (req.isAuthenticated()) {
-    done()
-  } else {
-    res.redirect('/')
-  }
-}
+// function isAuthenticated(req, res, next) {
+//   if (req.isAuthenticated()) {
+//     next()
+//   } else {
+//     res.redirect('/')
+//   }
+// }
+
+// function isAuthenticated(req, res, next) {
+//   // do any checks you want to in here
+
+//   // CHECK THE USER STORED IN SESSION FOR A CUSTOM VARIABLE
+//   // you can do this however you want with whatever variables you set up
+//   if (req.user.authenticated)
+//     return next();
+
+//   // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
+//   res.redirect('/');
+// }
 
 module.exports = Router;
 

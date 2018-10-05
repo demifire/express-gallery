@@ -4,7 +4,7 @@ const bp = require('body-parser');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const PORT = process.env.EXPRESS_CONTAINER_PORT;
-// const flash = require('connect-flash');
+const flash = require('connect-flash');
 
 
 const session = require('express-session');
@@ -33,7 +33,7 @@ app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(flash());
+app.use(flash());
 
 app.set('view engine', '.hbs');
 
