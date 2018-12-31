@@ -24,7 +24,8 @@ Router.route('/')
   })
 
   // POSTS NEW CREATED ITEM
-  .post(isAuthenticated, (req, res) => {
+  .post( (req, res) => {
+    console.log('***************************************************************************************************************************')
     const { id } = req.params;
     const newPhoto = {
       title: req.body.title,
@@ -42,6 +43,12 @@ Router.route('/')
         res.json(err)
       })
   })
+
+  //RENDER NEW ITEM FORM
+Router.route('/new')
+.get(isAuthenticated, (req, res) => {
+  res.render('new_item');
+})
 
 //RENDER DETAILS OF ITEM
 Router.route('/:id')
@@ -63,11 +70,6 @@ Router.route('/:id')
     })
 })
 
-//RENDER NEW ITEM FORM
-Router.route('/new')
-  .get(isAuthenticated, (req, res) => {
-    res.render('new_item');
-  })
 
 
 

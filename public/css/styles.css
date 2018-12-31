@@ -1,23 +1,8 @@
-@font-face {
-  font-family: 'PaintingWithChocolate';
-  src: url('../fonts/Painting_With_Chocolate.ttf');
-}
-
-@font-face {
-  font-family: 'Parisish';
-  src: url('../fonts/Parisish.ttf');
-}
-
-@font-face {
-  font-family: 'Aliquam';
-  src: url('../fonts/Aliquam.ttf');
-}
-
 body {
   margin: 0px;
   font-family: 'Aliquam', verdana, georgia;
   font-size: 20px;
-  background-color: #FFFFFF;
+  background-color: #222222;
   color: rgba(9, 9, 9, 0.735);
   width: 100%;
 }
@@ -55,66 +40,6 @@ body {
   flex-direction: row;
 }
 
-#sunset {
-  background-image: url('https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
-  width: 100%;
-  height: 475px;
-  background-repeat:no-repeat;
-  -webkit-background-size: 100% auto;
-  -moz-background-size: 100% auto;
-  -o-background-size: 100% auto;
-  background-size: 100% auto ;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 1px;
-}
-
-#sunset2 {
-  background-image: url('https://www.goodfreephotos.com/albums/germany/other-germany/sunset-over-the-lake-landscape-in-cuxhaven-germany.jpg');
-  width: 100%;
-  height: 475px;
-  background-repeat:no-repeat;
-  -webkit-background-size: 100% auto;
-  -moz-background-size: 100% auto;
-  -o-background-size: 100% auto;
-  background-size: 100% auto ;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 1px 1px 1px 0px;
-}
-
-#night {
-  background-image: url('https://images.pexels.com/photos/672914/pexels-photo-672914.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
-  width: 100%;
-  height: 475px;
-  background-repeat:no-repeat;
-  -webkit-background-size: 100% auto;
-  -moz-background-size: 100% auto;
-  -o-background-size: 100% auto;
-  background-size: 100% auto ;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0px 1px 1px 1px;
-}
-
-#night2 {
-  background-image: url('https://images.pexels.com/photos/792835/pexels-photo-792835.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
-  width: 100%;
-  height: 475px;
-  background-repeat:no-repeat;
-  -webkit-background-size: 100% auto;
-  -moz-background-size: 100% auto;
-  -o-background-size: 100% auto;
-  background-size: 100% auto ;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0px 1px 1px 0px;
-}
-
 .nav {
   flex: 2 0px;
   align-items: center;
@@ -147,7 +72,7 @@ a:link {
 
 h1 {
   display: block;
-  font-family: 'Parisish';
+  font-family: 'Open Sans', sans-serif;
   margin-block-start: 0em;
   margin-block-end: 0em;
   margin-inline-start: 0px;
